@@ -11,13 +11,13 @@ import { CardModule } from 'primeng/card';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  loginForm = this.fb.group (
-    {
-      usuario: ['', [Validators.required, Validators.name]],
-      password: ['', Validators.required]
-    }
-  )
+  // loginForm = this.fb.group (
+  //   {
+  //     usuario: ['', [Validators.required, Validators.name]],
+  //     password: ['', Validators.required]
+  //   }
+  // )
 
-  // //Constructor: Creamos un objeto llamado fb que hereda de FormBuilder
+  //Constructor: Creamos un objeto llamado fb que hereda de FormBuilder
   // constructor(private fb: FormBuilder){}
 }
