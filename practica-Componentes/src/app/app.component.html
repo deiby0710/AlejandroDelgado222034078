@@ -1,7 +1,8 @@
-<app-user></app-user>
-<app-agent></app-agent>
-<app-date></app-date>
-<div class="card flex justify-content-center">
-  <p-button label="Check" icon="pi pi-thumbs-up" iconPos="right"></p-button>
-</div>
-<router-outlet />
+<form (ngSubmit)="enviarDatos()" #formulario="ngForm">
+  <div class="flex flex-column justify-content-center">
+    <app-user (datosCapturados)="capturarDatosUsuario($event)"></app-user>
+    <app-agent (datosCapturados)="capturarDatosVendedor($event)"></app-agent>
+    <app-date (datosCapturados)="capturarDatosFechas($event)"></app-date>
+    <!-- <button type="submit" (click)="prueba()">Enviar</button> -->
+  </div>
+</form>

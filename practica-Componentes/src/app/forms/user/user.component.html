@@ -1,18 +1,24 @@
 <div class="flex align-items-center	justify-content-center flex-column">
     <h1>Formulario de Solicitud de Vacaciones</h1>
-    <div class="w-6 p-3">
+    <div class="w-5 p-3">
         <label for="">Nombre</label>
-        <div class="w-full">
-            <input type="text" pInputText  placeholder="Primer nombre" style="width: 49%;">
-            <input type="text" pInputText  placeholder="Apellido" style="width: 49%;">
+        <div class="w-full mt-3">
+            <input type="text" pInputText  placeholder="Primer nombre" style="width: 49%;" [(ngModel)]="firstName" name="firstName">
+            <input type="text" pInputText  placeholder="Apellido" style="width: 49%;" [(ngModel)]="lastName" name="lastName"> 
         </div>
     </div>
-    <div class="flex flex-column w-6 p-3">
+    <div class="flex flex-column w-5 p-3">
         <label for="">Correo electronico</label>
-        <input type="text" pInputText  name="" id="">
+        <div class="p-field p-input-icon-left mt-3">
+            <i class="pi pi-envelope"></i>
+            <input pInputText type="email" class="w-full"> 
+        </div>
     </div>
-    <div class="flex flex-column w-6 p-3">
+    <div class="flex flex-column w-5 p-3">
         <label for="">Teléfono</label>
-        <input type="text" appendIcon="pi-phone" pInputText >
+        <div class="p-field p-input-icon-left mt-3">
+            <i class="pi pi-phone"></i>
+            <input type="text" appendIcon="pi-phone" class="w-full" pInputText [(ngModel)]="phone" name="phone">
+        </div>
     </div>
 </div>
