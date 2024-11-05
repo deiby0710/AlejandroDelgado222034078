@@ -1,32 +1,24 @@
-import { Component, EventEmitter, Output} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, Input} from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [InputTextModule, FormsModule],
+  imports: [InputTextModule, ReactiveFormsModule, CommonModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  phone: string = '';
+  @Input() user!: FormGroup;
 
-  @Output() datosCapturados = new EventEmitter<{ 
-    firstName: string; lastName: string;
-    email: string; phone: string
-  }>();
-
-  // Método que se llamará cuando se desee enviar los datos
-  enviarDatos() {
-    this.datosCapturados.emit({
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email, 
-      phone: this.phone
-    });
+  constructor(private fb: FormBuilder){
+    this.user = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['',[Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]]
+    })
   }
 }

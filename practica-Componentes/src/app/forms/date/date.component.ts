@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Output, EventEmitter} from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input} from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
@@ -14,21 +14,13 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
   styleUrl: './date.component.css'
 })
 export class DateComponent {
-  firstDate: Date | null = null;
-  finishDate: Date | null= null;
-  textArea: string = ''; 
-  @Output() datosCapturados = new EventEmitter<{
-    firstDate1: Date | null;
-    finishDate1: Date | null;
-    textArea1: string;
-  }>();
+  @Input() dateFormFG: FormGroup;
 
-  // Método que se llamará cuando se desee enviar los datos
-  enviarDatos() {
-    this.datosCapturados.emit({
-      firstDate1: this.firstDate,
-      finishDate1: this.finishDate,
-      textArea1: this.textArea
+  constructor(private fb: FormBuilder){
+    this.dateFormFG = this.fb.group({
+      startDateFCN: ['', Validators.required],
+      endDateFCN: ['', Validators.required],
+      textAreaFCN: ['',Validators.required]
     });
   }
 }

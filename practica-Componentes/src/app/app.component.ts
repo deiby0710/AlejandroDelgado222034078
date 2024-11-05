@@ -6,7 +6,7 @@ import { DateComponent } from './forms/date/date.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -16,38 +16,41 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./app.component.css'] // Asegúrate de que sea styleUrls, no styleUrl
 })
 export class AppComponent {
-  title = 'practica-Componentes';
-  usuarioData: any = {};
-  vendedorData: any = {};
-  fechasData: any = {};
+  formUser: FormGroup;
+  formAgent: FormGroup;
+  formDate: FormGroup;
 
-  // Captura de datos del usuario
-  capturarDatosUsuario(datos: any) {
-    this.usuarioData = datos;
-    console.log("Datos del Usuario capturados:", this.usuarioData);
+  constructor(private fb: FormBuilder){
+    this.formUser = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['',[Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]]
+    });
+    this.formAgent = this.fb.group({
+      nameAgentFCN: ['' , Validators.required],
+      emailAgentFCN: ['', [Validators.required, Validators.email]]
+    });
+    this.formDate = this.fb.group({
+      startDateFCN: ['', Validators.required],
+      endDateFCN: ['', Validators.required],
+      textAreaFCN: ['',Validators.required]
+    });
   }
 
-  // Captura de datos del vendedor
-  capturarDatosVendedor(datos: any) {
-    this.vendedorData = datos;
-    console.log("Datos del Vendedor capturados:", this.vendedorData);
-  }
-
-  // Captura de datos de fechas
-  capturarDatosFechas(datos: any) {
-    this.fechasData = datos;
-    console.log("Datos de Fechas capturados:", this.fechasData);
-  }
-
-  // Método para enviar todos los datos
-  enviarDatos() {
-    console.log("Datos del Usuario:", this.usuarioData);
-    console.log("Datos del Vendedor:", this.vendedorData);
-    console.log("Datos de Fechas:", this.fechasData);
-  }
-
-  // Método de prueba al presionar el botón
-  prueba() {
-    console.log("Botón de enviar presionado");
+  onSubmit() {
+    if(this.formUser.valid && this.formAgent.valid && this.formDate.valid){
+      console.log("Nombre: ", this.formUser.value["firstName"])
+      console.log("Apellido: ", this.formUser.value["lastName"])
+      console.log("Email: ", this.formUser.value["email"])
+      console.log("Celular: ", this.formUser.value["phone"])
+      console.log("Nombre: ", this.formAgent.value["nameAgentFCN"])
+      console.log("Email: ", this.formAgent.value["emailAgentFCN"])
+      console.log("Fecha inicio: ", this.formDate.value["endDateFCN"])
+      console.log("Fecha de finalizacion: ", this.formDate.value["startDateFCN"])
+      console.log("Notas: ", this.formDate.value["textAreaFCN"])
+    }else{
+      console.log('Formulario Invalido')
+    }
   }
 }

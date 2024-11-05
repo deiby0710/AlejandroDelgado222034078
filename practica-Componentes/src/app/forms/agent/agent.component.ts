@@ -1,29 +1,22 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-agent',
   standalone: true,
-  imports: [InputTextModule, FormsModule],
+  imports: [InputTextModule, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './agent.component.html',
   styleUrls: ['./agent.component.css'] // Asegúrate de que sea styleUrls
 })
 export class AgentComponent {
-  nameAgent: string = ''; 
-  emailAgent: string = ''; 
+  @Input() agentFormFG: FormGroup;
 
-  @Output() datosCapturados = new EventEmitter<{ nameAgent: string; emailAgent: string }>();
-
-  // Método que se llamará cuando se desee enviar los datos
-  enviarDatos() {
-    console.log('Mandamos los datos desde agent:', {
-      nameAgent: this.nameAgent,
-      emailAgent: this.emailAgent
-    });
-    this.datosCapturados.emit({
-      nameAgent: this.nameAgent,
-      emailAgent: this.emailAgent
+  constructor(private fb: FormBuilder){
+    this.agentFormFG = this.fb.group({
+      nameAgentFCN: ['' , Validators.required],
+      emailAgentFCN: ['', [Validators.required, Validators.email]]
     });
   }
 }

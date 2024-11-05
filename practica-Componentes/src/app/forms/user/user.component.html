@@ -1,24 +1,33 @@
-<div class="flex align-items-center	justify-content-center flex-column">
+<div class="flex align-items-center	justify-content-center flex-column" [formGroup]="user">
     <h1>Formulario de Solicitud de Vacaciones</h1>
     <div class="w-5 p-3">
         <label for="">Nombre</label>
         <div class="w-full mt-3">
-            <input type="text" pInputText  placeholder="Primer nombre" style="width: 49%;" [(ngModel)]="firstName" name="firstName">
-            <input type="text" pInputText  placeholder="Apellido" style="width: 49%;" [(ngModel)]="lastName" name="lastName"> 
+            <input type="text" id="firstName" pInputText  placeholder="Primer nombre" style="width: 49%;" name="firstName" formControlName="firstName">
+            <input type="text" id="lastName" pInputText  placeholder="Apellido" style="width: 49%;" name="lastName" formControlName="lastName"> 
         </div>
+        <div *ngIf="user.controls['firstName'].invalid && user.controls['firstName'].touched || user.controls['lastName']?.invalid && user.controls['lastName']?.touched" class="error">
+            El nombre y apellido son requeridos
+          </div>
     </div>
     <div class="flex flex-column w-5 p-3">
         <label for="">Correo electronico</label>
         <div class="p-field p-input-icon-left mt-3">
             <i class="pi pi-envelope"></i>
-            <input pInputText type="email" class="w-full"> 
+            <input pInputText type="email" class="w-full" formControlName="email" placeholder="Email"> 
         </div>
+        <div *ngIf="user.controls['email'].invalid && user.controls['email'].touched" class="error">
+            El correo debe ser valido
+          </div>
     </div>
     <div class="flex flex-column w-5 p-3">
         <label for="">Teléfono</label>
         <div class="p-field p-input-icon-left mt-3">
             <i class="pi pi-phone"></i>
-            <input type="text" appendIcon="pi-phone" class="w-full" pInputText [(ngModel)]="phone" name="phone">
+            <input type="number" appendIcon="pi-phone" class="w-full" pInputText name="phone" formControlName="phone" placeholder="Celular">
+        </div>
+        <div *ngIf="user.controls['phone'].invalid && user.controls['phone'].touched" class="error">
+            El número debe tener 10 digitos
         </div>
     </div>
 </div>

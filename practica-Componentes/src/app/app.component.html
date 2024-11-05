@@ -1,8 +1,10 @@
-<form (ngSubmit)="enviarDatos()" #formulario="ngForm">
+<form>
   <div class="flex flex-column justify-content-center">
-    <app-user (datosCapturados)="capturarDatosUsuario($event)"></app-user>
-    <app-agent (datosCapturados)="capturarDatosVendedor($event)"></app-agent>
-    <app-date (datosCapturados)="capturarDatosFechas($event)"></app-date>
-    <!-- <button type="submit" (click)="prueba()">Enviar</button> -->
+    <app-user [user]="formUser"></app-user>
+    <app-agent [agentFormFG]="formAgent"></app-agent>
+    <app-date [dateFormFG]="formDate"></app-date>
+    <div class="flex justify-content-center align-items-center mb-5">
+      <p-button type="submit" label="Enviar" (onClick)="onSubmit()"></p-button>
+    </div>
   </div>
 </form>
