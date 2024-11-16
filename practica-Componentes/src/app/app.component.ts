@@ -7,7 +7,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +20,7 @@ export class AppComponent {
   formAgent: FormGroup;
   formDate: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService){
+  constructor(private fb: FormBuilder){
     this.formUser = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -41,22 +40,15 @@ export class AppComponent {
 
   onSubmit() {
     if(this.formUser.valid && this.formAgent.valid && this.formDate.valid){
-      const {firstName,lastName,email,phone} = this.formUser.value;
-      const {nameAgentFCN,emailAgentFCN} = this.formAgent.value;
-      const {startDateFCN,endDateFCN,textAreaFCN} = this.formDate.value;
-
-      this.loginService.send(firstName,lastName,email,phone,nameAgentFCN,emailAgentFCN,startDateFCN,endDateFCN,textAreaFCN).subscribe({
-        next: (response) => {
-          console.log("Información enviada Exitosamente", response);
-        },
-        error: error =>{
-          console.log("Error al enviar información", error);
-        },
-        complete:() => {
-          console.log("Envío de información completado");
-        },
-      })
-      
+      console.log("Nombre: ", this.formUser.value["firstName"])
+      console.log("Apellido: ", this.formUser.value["lastName"])
+      console.log("Email: ", this.formUser.value["email"])
+      console.log("Celular: ", this.formUser.value["phone"])
+      console.log("Nombre: ", this.formAgent.value["nameAgentFCN"])
+      console.log("Email: ", this.formAgent.value["emailAgentFCN"])
+      console.log("Fecha inicio: ", this.formDate.value["endDateFCN"])
+      console.log("Fecha de finalizacion: ", this.formDate.value["startDateFCN"])
+      console.log("Notas: ", this.formDate.value["textAreaFCN"])
     }else{
       console.log('Formulario Invalido')
     }
