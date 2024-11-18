@@ -1,0 +1,22 @@
+<div class="flex justify-content-center align-items-center flex-column w-full" [formGroup]="agentFormFG">
+    <div class="flex flex-column w-5 p-3">
+        <label for="">El nombre del gerente</label>
+        <div class="p-field p-input-icon-left mt-3">
+            <i class="pi pi-lightbulb"></i>
+            <input type="text" class="w-full" formControlName="nameAgentFCN" pInputText placeholder="Nombre">
+        </div>
+        <div *ngIf="agentFormFG.controls['nameAgentFCN'].invalid && agentFormFG.controls['nameAgentFCN'].touched" class="error">
+            El nombre del gerente es necesario
+        </div>
+    </div>
+    <div class="flex flex-column w-5 p-3">
+        <label for="">Correo electrónico del gerente</label>
+        <div class="p-field p-input-icon-left mt-3">
+            <i class="pi pi-envelope"></i>
+            <input type="text" class="w-full" formControlName="emailAgentFCN" pInputText placeholder="Email">
+        </div>
+        <div *ngIf="agentFormFG.controls['emailAgentFCN'].invalid && agentFormFG.controls['emailAgentFCN'].touched" class="error">
+            El correo debe ser valido
+          </div>
+    </div>
+</div>

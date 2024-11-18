@@ -1,0 +1,10 @@
+<form>
+  <div class="flex flex-column justify-content-center">
+    <app-user [user]="formUser"></app-user>
+    <app-agent [agentFormFG]="formAgent"></app-agent>
+    <app-date [dateFormFG]="formDate"></app-date>
+    <div class="flex justify-content-center align-items-center mb-5">
+      <p-button type="submit" label="Enviar" (onClick)="onSubmit()"></p-button>
+    </div>
+  </div>
+</form>
